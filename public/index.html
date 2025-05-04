@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hack2025 App</title>
+</head>
+<body>
+    <h1>Hackappella 2025 - Inspection citoyenne</h1>
+
+    <div id="azureMap" style="width: 100%; height: 100vh;"></div>
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+    <script src="https://atlas.microsoft.com/sdk/javascript/search/atlas-search.min.js"></script>
+    <script>
+    // To get the subscription key, you need to create an Azure Maps account:
+    // 1. Go to the Azure portal (https://portal.azure.com/).
+    // 2. Create a new Azure Maps account or use an existing one.
+    // 3. Navigate to the "Keys" section of your Azure Maps account.
+    // 4. Copy one of the primary or secondary keys and replace the placeholder in the code.
+        const subscriptionKey = '9iaenBastGt3aW9JMnZWfD0d2QJOe5vnCYQzwFdMgE1VuKpEcjxpJQQJ99BEACYeBjFx15c4AAAgAZMP2yPx'; // Replace with your Azure Maps subscription key
+       
+        const bounds = [-79.76259, 45.00048, -57.10932, 62.58358]; // [west, south, east, north] for Quebec
+        const mapOptions = {
+            bounds: bounds,
+            padding: 20 // Optional padding around the bounds
+        };
+
+        mapOptions.center = [(bounds[0] + bounds[2]) / 2, (bounds[1] + bounds[3]) / 2];
+        mapOptions.zoom = 6; // Adjust zoom level as needed
+        const map = new atlas.Map('azureMap', {
+            ...mapOptions,
+            authOptions: {
+                authType: 'subscriptionKey',
+                subscriptionKey: subscriptionKey
+            }
+        });
+
+        map.events.add('ready', () => {
+            // Add a simple control to the map
+            map.controls.add(new atlas.control.ZoomControl(), {
+                position: 'top-right'
+            });
+
+            map.controls.add(new atlas.control.StyleControl(), {
+                position: 'top-left'
+            })
+
+           
+        });
+
+       ;
+    </script>
+</body>
+</html>
